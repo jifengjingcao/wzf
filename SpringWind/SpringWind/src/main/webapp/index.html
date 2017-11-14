@@ -1,0 +1,97 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="gbk"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    #CSSM(["easyui","style"]) #JSM(["jquery", "easyui", "upload"]) #JS_ENV_VAL()
+</head>
+<body>
+<form method="post" enctype="multipart/form-data">
+    <div class="easyui-panel" title="笔记本电脑申请" data-options="" style="padding: 2px;">
+        <table width="100%" border="0" cellpadding="0" cellspacing="1">
+            <tr>
+                <td class="head" noWrap>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color='red'>*</font>申请标题</td>
+                <td class="even"><input class="easyui-validatebox" id="title" name="laptop.title"
+                                        value='$!{laptop.title}' readonly style="width: 180px;"/>
+                    #if(!$!{laptop.instId})
+                    -
+                    <input class="easyui-validatebox" id="title2" name="laptop.title2" style="width: 180px;"/></td>
+                #end
+                <td class="head" noWrap><font color='red'>*</font>申请人</td>
+                <td class="even"><input class="easyui-validatebox" id="userName" name="laptop.userName"
+                                        value='$!{laptop.userName}' style="width: 180px;" readonly="readonly"/></td>
+                <td><input type="hidden" id="userId" name="laptop.userId" value='$!{laptop.userId}'/></td>
+            </tr>
+
+            <tr>
+                <td class="head" noWrap><font color='red'>*</font>申请时间</td>
+                <td class="even"><input class="easyui-validatebox" id="createDate " name="laptop.createDate"
+                                        value='$!{laptop.createDate}' style="width: 180px;" readonly="readonly"/></td>
+
+                <td class="head" noWrap><font color='red'>*</font>所在部门</td>
+                <td class="even"><input class="easyui-validatebox" id="userOrgName" name="laptop.userOrgName"
+                                        value='$!{laptop.userOrgName}' style="width: 180px;" readonly="readonly"/>
+                </td>
+            </tr>
+            <tr>
+                <td class="head" noWrap><font color='red'>*</font>员工姓名</td>
+                <td class="even"><input class="easyui-validatebox" id="userName" name="laptop.userName"
+                                        value='$!{laptop.userOrgName}' style="width: 180px;" readonly="readonly"/>
+                </td>
+                <td class="head" noWrap><font color='red'>*</font>是否驻外</td>
+                <td class="even"><input class="easyui-validatebox" id="inOut" name="laptop.inOut"
+                                        value='$!{laptop.inOut}' style="width: 180px;" readonly="readonly"/>
+                </td>
+            </tr>
+        </table>
+
+        <table>
+            <tr>
+                <td class="head" noWrap style="text-align: right">
+                    申请原由
+                </td>
+                <td class="even" colspan="3" noWrap>
+                    <textarea name="laptop.remark" id="remark" rows=5 class="easyui-validatebox" cols=80
+                              style="float: left" validType="length[1,50]">$!{laptop.remark}</textarea>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    #if(!$!{laptop.instId})
+    <table>
+        <tr>
+            <td class="head" noWrap style="text-align: right">
+                附件上传
+            </td>
+            <td noWrap>
+                <div id="input">
+                    <input name="upload" id="file0" type="file" value="添加附件" onchange="addFile()"/>
+                    <font size="2.5" color="red">继续点击添加多个附件</font>
+                </div>
+                <div id="_file"></div>
+            </td>
+        </tr>
+    </table>
+
+    <div region="south" border="false" style="text-align: center; height: 30px; line-height: 30px;">
+        <a href="javascript:submit()" class="easyui-linkbutton" iconCls="icon-ok">提交</a>
+        <a href="javascript:clearForm()" class="easyui-linkbutton" iconCls="icon-cancel">取消</a>
+    </div>
+    #end
+    <input type="hidden" id="processId" name="laptop.processId" value="$!{laptop.processId}"/>
+</form>
+<div id="wbstoolbar" class="datagrid-toolbar" style="height:25px;display:none;">
+    <input class="easyui-searchbox" searcher="searchWbs" prompt="请填写WBS编码或者描述" style="width:300px"></input>
+</div>
+<iframe id="hideFrame" name="hideFrame" style="height: 0; width: 0"></iframe>
+<div id="mainWindow"/>
+</body>
+<script>
+    var instId = '$!{laptop.instId}';
+</script>
+<script type="text/javascript" src="$!{env.imgUrl}/js/platform/laptop/createApply.js?t=20160443209"></script>
+<script type="text/javascript" src="$!{env.imgUrl}/js/My97DatePicker/WdatePicker.js"></script>
+</html>
